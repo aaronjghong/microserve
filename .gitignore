@@ -1,0 +1,7 @@
+docs
+.claude
+.pytest_cache
+CLAUDE.md
+PROGRESS.md
+README_SETUP.md 
+*.pyc
