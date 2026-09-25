@@ -6,12 +6,5 @@ Public attribute:
         that can drift.
 """
 
-
-def __getattr__(name: str) -> object:
-    """PEP 562 module __getattr__ — placeholder until `__version__` is defined.
-
-    Delete this function once you define `__version__` at module level.
-    """
-    if name == "__version__":
-        raise NotImplementedError("microserve.__version__")
-    raise AttributeError(f"module 'microserve' has no attribute {name!r}")
+from importlib.metadata import version
+__version__ = version('microserve')

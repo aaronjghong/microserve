@@ -35,13 +35,17 @@ class EngineConfig(BaseModel):
         Must raise ValueError (pydantic wraps it as ValidationError), not any other
         exception type.
         """
-        raise NotImplementedError
+        if not 0 < v <= 1:
+            raise ValueError("GPU memory utilization must be between (0,1]")
+        return v
 
     @field_validator("max_num_seqs")
     @classmethod
     def _check_max_num_seqs(cls, v: int) -> int:
         """Enforce `max_num_seqs >= 1`."""
-        raise NotImplementedError
+        if not v >= 1:
+            raise ValueError("Max number of sequences must be >= 1")
+        return v
 
     @model_validator(mode="after")
     def _check_block_alignment(self) -> Self:
@@ -49,7 +53,9 @@ class EngineConfig(BaseModel):
 
         Invariant: a max-length sequence fills an integer number of KV-cache blocks.
         """
-        raise NotImplementedError
+        if not self.max_seq_len % self.block_size == 0:
+            raise ValueError("Max sequences length must be a multiple of the block size")
+        return self
 
 
 class SamplingParams(BaseModel):
@@ -71,25 +77,33 @@ class SamplingParams(BaseModel):
     @classmethod
     def _check_temperature(cls, v: float) -> float:
         """Enforce `temperature >= 0`."""
-        raise NotImplementedError
+        if not v >= 0:
+            raise ValueError("Temperature must be >= 0")
+        return v
 
     @field_validator("top_p")
     @classmethod
     def _check_top_p(cls, v: float) -> float:
         """Enforce `0 < top_p <= 1`."""
-        raise NotImplementedError
+        if not 0 < v <= 1:
+            raise ValueError("Top P must be in the bounds (0,1]")
+        return v
 
     @field_validator("top_k")
     @classmethod
     def _check_top_k(cls, v: int) -> int:
         """Enforce `top_k >= 0` (0 means disabled)."""
-        raise NotImplementedError
+        if not v >= 0:
+            raise ValueError("Top K must be >= 0")
+        return v
 
     @field_validator("max_tokens")
     @classmethod
     def _check_max_tokens(cls, v: int) -> int:
         """Enforce `max_tokens >= 1`."""
-        raise NotImplementedError
+        if not v >= 1:
+            raise ValueError("Max Tokens must be >= 1")
+        return v
 
     @property
     def is_greedy(self) -> bool:
@@ -98,4 +112,4 @@ class SamplingParams(BaseModel):
         Invariant: the sampler dispatches greedy vs. stochastic on this and nothing else.
         Must be a plain property, not a field, so it is excluded from `model_dump`.
         """
-        raise NotImplementedError
+        return self.temperature == 0
