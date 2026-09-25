@@ -1,4 +1,4 @@
-docs
+docs/microserve_spec.md
 .claude
 .pytest_cache
 CLAUDE.md
@@ -6,3 +6,4 @@ PROGRESS.md
 README_SETUP.md 
 *.pyc
 *.lock
+!uv.lock
