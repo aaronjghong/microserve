@@ -1,0 +1,70 @@
+{
+  "description": "Fixed prompts for correctness tests. Never edit after goldens are generated; add a new file instead.",
+  "prompts": [
+    {
+      "id": "len_008",
+      "note": "about 8 tokens",
+      "text": "The capital of France is"
+    },
+    {
+      "id": "len_016",
+      "note": "about 16 tokens",
+      "text": "Here is a list of three fruits that are usually red when they are ripe:"
+    },
+    {
+      "id": "chat_yes",
+      "note": "about 32 tokens; chat prompt expected to end with EOS well before 32 new tokens",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Reply with one word: yes."
+        }
+      ]
+    },
+    {
+      "id": "len_064",
+      "note": "about 64 tokens",
+      "text": "Long before satellites and radio beacons, the safety of a ship approaching a rocky coast at night depended on a single fixed point of light. The earliest lighthouses were little more than open fires kept burning on hilltops or on top of stone towers, and the keepers who fed them wood, coal, or oil"
+    },
+    {
+      "id": "len_128",
+      "note": "about 128 tokens",
+      "text": "Long before satellites and radio beacons, the safety of a ship approaching a rocky coast at night depended on a single fixed point of light. The earliest lighthouses were little more than open fires kept burning on hilltops or on top of stone towers, and the keepers who fed them wood, coal, or oil worked through the night in every season. A fire was visible only a few miles out to sea, and in rain or fog it could vanish entirely, so sailors learned to treat every light with a mixture of gratitude and suspicion.\n\nThe great technical problem of the lighthouse was not producing light but throwing it far enough to"
+    },
+    {
+      "id": "len_256",
+      "note": "about 256 tokens",
+      "text": "Long before satellites and radio beacons, the safety of a ship approaching a rocky coast at night depended on a single fixed point of light. The earliest lighthouses were little more than open fires kept burning on hilltops or on top of stone towers, and the keepers who fed them wood, coal, or oil worked through the night in every season. A fire was visible only a few miles out to sea, and in rain or fog it could vanish entirely, so sailors learned to treat every light with a mixture of gratitude and suspicion.\n\nThe great technical problem of the lighthouse was not producing light but throwing it far enough to matter. A flame radiates in every direction at once, which means that most of its energy is spent lighting the sky, the ground, and the empty sea behind the tower. Early engineers tried polished metal reflectors shaped like shallow bowls, placing an oil lamp at the focus so that the reflected rays left the tower as a rough beam. These reflectors helped, but they tarnished quickly in salt air and had to be scrubbed and polished constantly.\n\nThe decisive improvement came from a French physicist named Augustin Fresnel in the early nineteenth century. Fresnel realized that a large glass lens would bend light into a narrow beam"
+    },
+    {
+      "id": "len_512",
+      "note": "about 512 tokens",
+      "text": "Long before satellites and radio beacons, the safety of a ship approaching a rocky coast at night depended on a single fixed point of light. The earliest lighthouses were little more than open fires kept burning on hilltops or on top of stone towers, and the keepers who fed them wood, coal, or oil worked through the night in every season. A fire was visible only a few miles out to sea, and in rain or fog it could vanish entirely, so sailors learned to treat every light with a mixture of gratitude and suspicion.\n\nThe great technical problem of the lighthouse was not producing light but throwing it far enough to matter. A flame radiates in every direction at once, which means that most of its energy is spent lighting the sky, the ground, and the empty sea behind the tower. Early engineers tried polished metal reflectors shaped like shallow bowls, placing an oil lamp at the focus so that the reflected rays left the tower as a rough beam. These reflectors helped, but they tarnished quickly in salt air and had to be scrubbed and polished constantly.\n\nThe decisive improvement came from a French physicist named Augustin Fresnel in the early nineteenth century. Fresnel realized that a large glass lens would bend light into a narrow beam far more efficiently than a mirror, but a single solid lens big enough for a lighthouse would be impossibly heavy and would absorb much of the light passing through it. His solution was to divide the lens into concentric rings of prisms, each ring angled so that it bent light exactly as the corresponding part of a solid lens would have done. The result was a structure of brass and glass that looked like a giant beehive and could concentrate the light of a modest lamp into a beam visible more than twenty miles away.\n\nFresnel lenses came in several sizes, called orders, with the largest first-order lenses standing taller than a person and weighing several tons. Many of them rested on a bath of liquid mercury so that the entire assembly could rotate smoothly with very little friction, driven by a clockwork mechanism that the keeper wound by hand every few hours. Rotation mattered because it gave each lighthouse a signature. By using different arrangements of panels, engineers could make one light flash once every ten seconds, another flash twice in quick succession, and a third show a steady beam interrupted by long dark intervals. A navigator who counted the timing of the flashes could identify the lighthouse from a published list and fix the ship's position on the chart.\n\nThe life of"
+    },
+    {
+      "id": "len_1024",
+      "note": "about 1024 tokens",
+      "text": "Long before satellites and radio beacons, the safety of a ship approaching a rocky coast at night depended on a single fixed point of light. The earliest lighthouses were little more than open fires kept burning on hilltops or on top of stone towers, and the keepers who fed them wood, coal, or oil worked through the night in every season. A fire was visible only a few miles out to sea, and in rain or fog it could vanish entirely, so sailors learned to treat every light with a mixture of gratitude and suspicion.\n\nThe great technical problem of the lighthouse was not producing light but throwing it far enough to matter. A flame radiates in every direction at once, which means that most of its energy is spent lighting the sky, the ground, and the empty sea behind the tower. Early engineers tried polished metal reflectors shaped like shallow bowls, placing an oil lamp at the focus so that the reflected rays left the tower as a rough beam. These reflectors helped, but they tarnished quickly in salt air and had to be scrubbed and polished constantly.\n\nThe decisive improvement came from a French physicist named Augustin Fresnel in the early nineteenth century. Fresnel realized that a large glass lens would bend light into a narrow beam far more efficiently than a mirror, but a single solid lens big enough for a lighthouse would be impossibly heavy and would absorb much of the light passing through it. His solution was to divide the lens into concentric rings of prisms, each ring angled so that it bent light exactly as the corresponding part of a solid lens would have done. The result was a structure of brass and glass that looked like a giant beehive and could concentrate the light of a modest lamp into a beam visible more than twenty miles away.\n\nFresnel lenses came in several sizes, called orders, with the largest first-order lenses standing taller than a person and weighing several tons. Many of them rested on a bath of liquid mercury so that the entire assembly could rotate smoothly with very little friction, driven by a clockwork mechanism that the keeper wound by hand every few hours. Rotation mattered because it gave each lighthouse a signature. By using different arrangements of panels, engineers could make one light flash once every ten seconds, another flash twice in quick succession, and a third show a steady beam interrupted by long dark intervals. A navigator who counted the timing of the flashes could identify the lighthouse from a published list and fix the ship's position on the chart.\n\nThe life of a keeper was demanding and often lonely. Towers on offshore rocks might be reachable only when the sea was calm, and supply boats could be delayed for weeks by storms. Keepers trimmed wicks, refilled oil reservoirs, cleaned soot from the lens, recorded the weather, and stood watch through the night to make sure the light never failed. In many places whole families lived at the station, and children grew up doing their lessons in the shadow of the tower while their parents divided the night into watches.\n\nFuel changed several times over the years. Whale oil gave way to colza oil pressed from rapeseed, then to lard oil, and eventually to kerosene, which burned brighter and more cleanly. Kerosene lamps were later improved with incandescent mantles, which glowed white hot when heated and produced far more light from the same amount of fuel. In the twentieth century electricity arrived, first at stations near towns and later at remote towers powered by generators or batteries, and the flame that had defined the lighthouse for two thousand years was finally replaced by a bulb.\n\nElectrification also made it possible to automate the lights. Timers, light sensors, and automatic bulb changers could keep a beacon running without a person on site, and one by one the keepers were withdrawn. Today most lighthouses are unattended, monitored remotely, and supplemented by electronic navigation systems that tell a ship its position to within a few meters. Yet the towers remain in service in many countries, because a visible light is simple, independent of any electronic system, and understood by every sailor.\n\nMany old stations have found second lives as museums, guest houses, and research outposts. Visitors climb the spiral stairs to see the lens room, where the great glass prisms still catch the afternoon sun and scatter it across the walls in bands of color. Standing there, it is easy to forget that the whole elaborate structure existed for one practical purpose: to put a small, reliable point of light where a tired navigator would be looking for it on a dark night.\n\nHistorians who study these stations often point out that lighthouses were among the first pieces of public infrastructure built for strangers. A keeper would never meet most of the sailors whose lives depended on the lamp, and the merchants who paid the harbor dues that funded the tower rarely saw it themselves. The light was a promise made to anyone who might pass, kept night after night by people who expected no thanks, and in that sense the humble lighthouse is a good symbol of"
+    },
+    {
+      "id": "unicode",
+      "note": "non-Latin scripts, accents, and emoji",
+      "text": "Traduis en anglais : 東京は日本の首都です。Москва — столица России. Ça coûte 12 € au café 🌍🚀, naïvement."
+    },
+    {
+      "id": "code",
+      "note": "Python source with indentation",
+      "text": "def fibonacci(n: int) -> int:\n    \"\"\"Return the n-th Fibonacci number.\"\"\"\n    if n < 2:\n        return n\n"
+    },
+    {
+      "id": "repeated",
+      "note": "one token repeated many times",
+      "text": "hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello "
+    },
+    {
+      "id": "empty",
+      "note": "empty text; tokenizes to just BOS",
+      "text": ""
+    }
+  ]
+}
