@@ -13,8 +13,8 @@ from typing import Any
 import pytest
 
 from tests.golden_utils import (
-    GOLDEN_DEVICE,
     GOLDEN_DTYPE,
+    TEST_DEVICE,
     TEST_MODEL,
     Prompt,
     load_manifest,
@@ -55,7 +55,7 @@ def reference_tokenizer() -> Any:
 
 @pytest.fixture(scope="session")
 def reference_model() -> Any:
-    """The test model in bf16 on CUDA, loaded directly through Hugging Face.
+    """The test model in bf16 on the test device, loaded directly through Hugging Face.
 
     Forward and generation tests use this rather than microserve's own loader, so a
     loader bug shows up only in the loader tests.
@@ -64,7 +64,7 @@ def reference_model() -> Any:
     from transformers import AutoModelForCausalLM
 
     model = AutoModelForCausalLM.from_pretrained(TEST_MODEL, dtype=torch.bfloat16)
-    return model.to("cuda").eval()
+    return model.to(TEST_DEVICE).eval()
 
 
 @pytest.fixture(scope="session")
@@ -76,8 +76,10 @@ def golden_manifest() -> dict[str, Any]:
     """
     manifest = load_manifest(TEST_MODEL)
     made_with = (manifest["dtype"], manifest["device"])
-    assert made_with == (GOLDEN_DTYPE, GOLDEN_DEVICE), (
-        f"goldens were generated with {made_with}, but tests run with "
-        f"{(GOLDEN_DTYPE, GOLDEN_DEVICE)}; regenerate them with `uv run python -m tests.gen_golden`"
+    running_with = (GOLDEN_DTYPE, TEST_DEVICE)
+    assert made_with == running_with, (
+        f"goldens were generated with {made_with}, but tests run with {running_with}; "
+        "run these tests where the goldens were made (unset MICROSERVE_TEST_DEVICE on a CUDA "
+        "machine), or regenerate them with `uv run python -m tests.gen_golden`"
     )
     return manifest

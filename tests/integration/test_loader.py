@@ -8,7 +8,7 @@ import pytest
 
 from microserve.config import EngineConfig
 from microserve.model.loader import has_chat_template, load_model, load_tokenizer
-from tests.golden_utils import REPORT_MODEL, TEST_MODEL
+from tests.golden_utils import REPORT_MODEL, TEST_DEVICE, TEST_MODEL
 
 pytestmark = [pytest.mark.gpu, pytest.mark.model]
 
@@ -81,7 +81,7 @@ def test_model_params_on_requested_device_and_dtype(dtype_name: str, torch_dtype
 
     placements = {(p.device.type, p.dtype) for p in model.parameters()}
 
-    assert placements == {("cuda", getattr(torch, torch_dtype_name))}
+    assert placements == {(TEST_DEVICE, getattr(torch, torch_dtype_name))}
     _release(model)
 
 

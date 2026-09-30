@@ -50,7 +50,16 @@ def prefill(
       - Passing an all-ones `attention_mask` gives the same result as passing none.
       - No autograd state is recorded.
     """
-    raise NotImplementedError
+    from torch import inference_mode
+    input = {
+        "input_ids": input_ids
+    }
+    if attention_mask is not None: 
+        input["attention_mask"] = attention_mask
+    with inference_mode():
+        out = model(**input)
+    
+    return PrefillOutput(logits_last=out.logits[:, -1, :], past_kv=out.past_key_values)
 
 
 def decode_step(
@@ -68,4 +77,16 @@ def decode_step(
         its last position, so incremental decoding matches recomputing from scratch.
       - No autograd state is recorded.
     """
-    raise NotImplementedError
+    from torch import inference_mode
+    input = {
+        "input_ids": next_ids
+    }
+    if past_kv is not None:
+        input["past_key_values"] = past_kv
+    if attention_mask is not None:
+        input["attention_mask"] = attention_mask
+
+    with inference_mode():
+        out = model(**input)
+
+    return DecodeOutput(logits = out.logits[:,-1,:], past_kv = out.past_key_values)

@@ -7,7 +7,7 @@ from typing import Any
 import pytest
 
 from microserve.model.forward import decode_step, prefill
-from tests.golden_utils import load_prompts, tokenize_prompt
+from tests.golden_utils import TEST_DEVICE, load_prompts, tokenize_prompt
 
 pytestmark = [pytest.mark.gpu, pytest.mark.model]
 
@@ -20,7 +20,7 @@ PROMPT_PARAMS = [pytest.param(p, id=p.id) for p in PROMPTS]
 def _input_ids(tokenizer: Any, prompt: Any) -> Any:
     import torch
 
-    return torch.tensor([tokenize_prompt(tokenizer, prompt)], device="cuda")
+    return torch.tensor([tokenize_prompt(tokenizer, prompt)], device=TEST_DEVICE)
 
 
 def _full_forward_last_logits(model: Any, input_ids: Any) -> Any:

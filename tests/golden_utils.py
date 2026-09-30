@@ -26,6 +26,12 @@ GOLDEN_ROOT = FIXTURES_DIR / "golden"
 TEST_MODEL: str = os.environ.get("TEST_MODEL", "HuggingFaceTB/SmolLM2-135M-Instruct")
 REPORT_MODEL: str = os.environ.get("REPORT_MODEL", "Qwen/Qwen2.5-1.5B-Instruct")
 
+# Device the model tests run on. Leave unset (CUDA) for real runs; set
+# MICROSERVE_TEST_DEVICE=cpu on a machine without a GPU to exercise the model tests during
+# development. Tolerances are unchanged. Tests that compare against goldens still refuse to
+# run unless the device matches the one the goldens were made on.
+TEST_DEVICE: str = os.environ.get("MICROSERVE_TEST_DEVICE", "cuda")
+
 GREEDY_32 = "greedy_32"
 GOLDEN_CONFIGS: dict[str, dict[str, Any]] = {
     GREEDY_32: {"do_sample": False, "max_new_tokens": 32},
