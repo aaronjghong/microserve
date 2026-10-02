@@ -1,0 +1,22 @@
+{
+  "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+  "model_revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+  "dtype": "bf16",
+  "device": "cuda",
+  "gpu_name": "NVIDIA RTX Spark N1X (6144-core Blackwell RTX GPU)",
+  "eos_token_ids": [
+    2
+  ],
+  "configs": {
+    "greedy_32": {
+      "do_sample": false,
+      "max_new_tokens": 32
+    }
+  },
+  "prompts_sha256": "6c667d7d642f63674a68a964593541a8ed8a09932b28bcfd87de585389aa252e",
+  "transformers_version": "5.17.0",
+  "torch_version": "2.14.0+cu134",
+  "cuda_version": "13.4",
+  "python_version": "3.12.15",
+  "created_utc": "2026-10-02T21:23:06+00:00"
+}
