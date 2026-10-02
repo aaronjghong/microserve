@@ -12,6 +12,9 @@ from tests.golden_utils import TEST_DEVICE, load_prompts, tokenize_prompt
 pytestmark = [pytest.mark.gpu, pytest.mark.model]
 
 BF16_TOLERANCE = {"atol": 2e-2, "rtol": 2e-2}
+# Cached decode and full recompute round differently: up to ~5e-5 apart in fp32 on GPU, and
+# ~0.9 in bf16 even for Hugging Face's own cache. A real cache bug moves logits by ~1.
+CACHE_FP32_TOLERANCE = {"atol": 1e-4, "rtol": 1e-4}
 DECODE_STEPS = 8
 PROMPTS = load_prompts()
 PROMPT_PARAMS = [pytest.param(p, id=p.id) for p in PROMPTS]
@@ -48,28 +51,30 @@ def test_prefill_matches_full_forward_last_logits(
 
 @pytest.mark.parametrize("prompt", PROMPT_PARAMS)
 def test_decode_steps_match_full_forward(
-    prompt: Any, reference_model: Any, reference_tokenizer: Any
+    prompt: Any, reference_model_fp32: Any, reference_tokenizer: Any
 ) -> None:
     """Each incremental decode step matches recomputing the whole sequence from scratch.
 
     This proves the KV cache carries exactly the right state from step to step. Both
-    paths are fed the same token at each step.
+    paths are fed the same token at each step. Runs in fp32: in bf16 the two paths round
+    too differently to tell a cache bug from noise.
     """
     import torch
 
+    model = reference_model_fp32
     sequence = _input_ids(reference_tokenizer, prompt)
-    out = prefill(reference_model, sequence, torch.ones_like(sequence))
+    out = prefill(model, sequence, torch.ones_like(sequence))
     logits, past_kv = out.logits_last, out.past_kv
 
     for step in range(DECODE_STEPS):
         next_ids = logits.argmax(dim=-1, keepdim=True)
         sequence = torch.cat([sequence, next_ids], dim=1)
 
-        step_out = decode_step(reference_model, next_ids, past_kv, torch.ones_like(sequence))
-        expected = _full_forward_last_logits(reference_model, sequence)
+        step_out = decode_step(model, next_ids, past_kv, torch.ones_like(sequence))
+        expected = _full_forward_last_logits(model, sequence)
 
         torch.testing.assert_close(
-            step_out.logits, expected, **BF16_TOLERANCE,
+            step_out.logits, expected, **CACHE_FP32_TOLERANCE,
             msg=lambda m, step=step: f"decode step {step}: {m}",
         )
         logits, past_kv = step_out.logits, step_out.past_kv

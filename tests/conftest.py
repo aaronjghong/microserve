@@ -68,6 +68,19 @@ def reference_model() -> Any:
 
 
 @pytest.fixture(scope="session")
+def reference_model_fp32() -> Any:
+    """The test model in fp32 on the test device, loaded directly through Hugging Face.
+
+    For comparisons where bf16 rounding would swamp the difference being tested.
+    """
+    import torch
+    from transformers import AutoModelForCausalLM
+
+    model = AutoModelForCausalLM.from_pretrained(TEST_MODEL, dtype=torch.float32)
+    return model.to(TEST_DEVICE).eval()
+
+
+@pytest.fixture(scope="session")
 def golden_manifest() -> dict[str, Any]:
     """The golden manifest for the test model, checked against how the tests run.
 
