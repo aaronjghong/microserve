@@ -52,7 +52,7 @@ def env_report() -> dict[str, str | None]:
     env_info["cuda"] = None
     if (env_info["torch"] is not None):
         info = env_info["torch"].split("+") # Will be something like torch+cuXXX if cuda
-        if (len(info) == 1 and info[1][0:2].lower() == "cu"):
+        if (len(info) == 2 and info[1][0:2].lower() == "cu"):
             env_info["cuda"] = f"{info[1][2:4]}.{info[1][4:]}" # For now, always assume that first 2 digits are Major, rest are minor
 
     return env_info
